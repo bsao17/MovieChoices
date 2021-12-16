@@ -14,13 +14,16 @@ export default function FilmItem({ title, vote, poster, films_details, out_date 
 
       {/* data */}
       <View style={styles.data}>
+        {/* Header data */}
         <View style={styles.header}>
           <Text style={styles.title_next}>{title}</Text>
           <Text style={styles.vote}> {vote}</Text>
         </View>
+        {/* Details data */}
         <View>
             <Text style={styles.films_details} numberOfLines={6} >{films_details}</Text>
         </View>
+        {/* Footer data with out date */}
         <View>
             <Text style={styles.out_date} >Date de sortie: {out_date} </Text>
         </View>
