@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     borderColor: "grey",
     borderWidth: 2,
     marginTop: 15,
+    backgroundColor: '#E9E9EE'
   },
   films_details: {
     textAlign: "justify",
