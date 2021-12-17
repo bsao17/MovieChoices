@@ -23,7 +23,7 @@ export default function FilmItem({ item }) {
         </View>
         {/* Details data */}
         <View>
-          <Text style={styles.films_details} numberOfLines={6}>
+          <Text style={styles.films_details} numberOfLines={5}>
             {item.overview}
           </Text>
         </View>
@@ -56,16 +56,19 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: 'space-evenly',
   },
   out_date: {
     textAlign: "right",
-    fontSize: 16,
+    fontSize: 14,
     margin: 5,
   },
   title_next: {
-    fontSize: 16,
+    fontSize: 14,
     margin: 5,
+    paddingHorizontal: 15,
+    fontWeight: 'bold',
+    width: '80%'
   },
   poster: {
     flex: 1,
@@ -81,5 +84,6 @@ const styles = StyleSheet.create({
   vote: {
     fontSize: 16,
     margin: 5,
+    marginRight: 20
   },
 });
