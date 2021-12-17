@@ -6,19 +6,19 @@ import { getMovieFromApiWithSearchText } from "../API/TMDBApi";
 export default class Search extends Component {
   constructor(props) {
     super(props);
+    this.searchText = ""
     this.state = {
       films: [],
-      searchText: "",
     };
   }
   async _loadFilm() {
-   await getMovieFromApiWithSearchText(this.state.searchText).then((data) => {
+   await getMovieFromApiWithSearchText(this.searchText).then((data) => {
       this.setState({ films: data });
     });
   }
 
   _searchTextInputChange(text) {
-    this.setState({ searchText: text });
+    return this.searchText = text
   }
 
   render() {
@@ -39,10 +39,7 @@ export default class Search extends Component {
         />
         <FlatList
           data={this.state.films}
-          keyExtractor={(item) => {
-            item.id.toString();
-          }}
-          renderItem={({ item }) => <FilmItem item={item} key={item.id} />}
+          renderItem={({ item }) => <FilmItem key={item.id} item={item}/>}
         />
       </View>
     );
