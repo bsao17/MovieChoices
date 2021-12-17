@@ -1,51 +1,61 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import {
-  View,
-  TextInput,
-  Button,
-  StyleSheet,
-  FlatList,
+    View,
+    TextInput,
+    Button,
+    StyleSheet,
+    FlatList,
 } from "react-native";
 import films from "../helpers/filmsData";
 import FilmItem from "./FilmItem";
+import {getMovieFromApiWithSearchText} from "../API/TMDBApi";
 
 export default class Search extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <View style={styles.container}>
-        <TextInput style={styles.textinput} placeholder="Titre du Film" />
-        <Button title="Rechercher" onPress={() => {}} />
-        <FlatList
-          data={films}
-          renderItem={({ item }) => (
-            <FilmItem
-              title={item.title}
-              vote={item.vote_average}
-              poster={item.poster_path}
-              films_details={item.overview}
-              out_date={item.release_date}
-            />
-          )}
-        />
-      </View>
-    );
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            films: films
+        }
+    }
+    async _loadFilm() {
+       await getMovieFromApiWithSearchText("star").then(data => {
+            this.setState({films: data})
+        })
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <TextInput style={styles.textinput} placeholder={"Titre du film"}/>
+                <Button title="Rechercher" onPress={() => {
+                    this._loadFilm()
+                }}/>
+                <FlatList
+                    data={this.state.films}
+                    keyExtractor={(item) =>{item.title}}
+                    renderItem={({item}) => (
+                        <FilmItem
+                            key={item.id}
+                            item={item}/>
+                    )}
+                />
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    margin: 20,
-  },
-  textinput: {
-    marginLeft: 5,
-    marginRight: 5,
-    height: 50,
-    borderColor: "#000000",
-    borderWidth: 1,
-    paddingLeft: 5,
-  },
+    container: {
+        flex: 1,
+        margin: 20,
+    },
+    textinput: {
+        marginLeft: 5,
+        marginRight: 5,
+        marginTop: 20,
+        height: 50,
+        borderColor: "#000000",
+        borderWidth: 1,
+        paddingLeft: 5,
+    },
 });

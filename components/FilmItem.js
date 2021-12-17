@@ -1,13 +1,13 @@
 import React from "react";
 import {ScrollView, View, Text, StyleSheet, Image } from "react-native";
 
-export default function FilmItem({ title, vote, poster, films_details, out_date }) {
+export default function FilmItem({ item }) {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} key={item.id} >
       {/* Poster */}
       <View style={styles.poster}>
         <Image
-          source={{ uri: poster }}
+          source={{ uri: item.poster_path }}
           style={{ width: "100%", height: "100%" }}
         />
       </View>
@@ -16,16 +16,16 @@ export default function FilmItem({ title, vote, poster, films_details, out_date 
       <View style={styles.data}>
         {/* Header data */}
         <View style={styles.header}>
-          <Text style={styles.title_next}>{title}</Text>
-          <Text style={styles.vote}> {vote}</Text>
+          <Text style={styles.title_next}>{item.title}</Text>
+          <Text style={styles.vote}>⭐ {item.vote_average}</Text>
         </View>
         {/* Details data */}
         <View>
-            <Text style={styles.films_details} numberOfLines={6} >{films_details}</Text>
+            <Text style={styles.films_details} numberOfLines={6} >{item.overview}</Text>
         </View>
         {/* Footer data with out date */}
         <View>
-            <Text style={styles.out_date} >Date de sortie: {out_date} </Text>
+            <Text style={styles.out_date} >Date de sortie: {item.release_date} </Text>
         </View>
       </View>
     </View>
