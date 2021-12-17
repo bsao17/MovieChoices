@@ -7,7 +7,7 @@ export default function FilmItem({ item }) {
       {/* Poster */}
       <View style={styles.poster}>
         <Image
-          source={{ uri: item.poster_path }}
+          source={{ uri: "https://image.tmdb.org/t/p/w500" + item.poster_path }}
           style={{ width: "100%", height: "100%" }}
         />
       </View>

@@ -14,11 +14,11 @@ export default class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            films: films
+            films: []
         }
     }
     async _loadFilm() {
-       await getMovieFromApiWithSearchText("star").then(data => {
+       await getMovieFromApiWithSearchText("matrix").then(data => {
             this.setState({films: data})
         })
     }
