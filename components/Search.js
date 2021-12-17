@@ -23,16 +23,24 @@ export default class Search extends Component {
     this.searchText = text;
   }
 
+  _handleKeyPress(event, K){
+    if(event.key === K){
+        this._loadFilm()
+    }
+  }
+
   render() {
     console.log("render");
     return (
       <View style={styles.container}>
         <TextInput
           style={styles.textinput}
+          autoFocus={true}
+          onSubmitEditing={()=>{this._handleKeyPress('enter')}}
           placeholder={"Titre du film"}
           onChangeText={(text) => {
-            this._searchTextInputChange(text);
-          }}
+              this._searchTextInputChange(text);
+            }}
         />
         <Button
           title="Rechercher"
