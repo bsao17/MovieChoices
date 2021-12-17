@@ -1,13 +1,15 @@
 import React from "react";
-import {ScrollView, View, Text, StyleSheet, Image } from "react-native";
+import { ScrollView, View, Text, StyleSheet, Image } from "react-native";
 
 export default function FilmItem({ item }) {
   return (
-    <View style={styles.container} key={item.id} >
+    <View style={styles.container} key={item.id}>
       {/* Poster */}
       <View style={styles.poster}>
         <Image
-          source={{ uri: "https://image.tmdb.org/t/p/original" + item.poster_path }}
+          source={{
+            uri: "https://image.tmdb.org/t/p/original" + item.poster_path,
+          }}
           style={{ width: "100%", height: "100%" }}
         />
       </View>
@@ -21,11 +23,15 @@ export default function FilmItem({ item }) {
         </View>
         {/* Details data */}
         <View>
-            <Text style={styles.films_details} numberOfLines={6} >{item.overview}</Text>
+          <Text style={styles.films_details} numberOfLines={6}>
+            {item.overview}
+          </Text>
         </View>
         {/* Footer data with out date */}
         <View>
-            <Text style={styles.out_date} >Date de sortie: {item.release_date} </Text>
+          <Text style={styles.out_date}>
+            Date de sortie: {item.release_date}{" "}
+          </Text>
         </View>
       </View>
     </View>
@@ -41,21 +47,21 @@ const styles = StyleSheet.create({
     borderColor: "grey",
     borderWidth: 2,
     marginTop: 15,
-    backgroundColor: '#E9E9EE'
+    backgroundColor: "#E9E9EE",
   },
   films_details: {
     textAlign: "justify",
     padding: 10,
   },
   header: {
-     flex: 1,
-     flexDirection: 'row', 
-     justifyContent: 'space-around'
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-around",
   },
   out_date: {
-      textAlign: 'right',
-      fontSize: 16,
-      margin: 5
+    textAlign: "right",
+    fontSize: 16,
+    margin: 5,
   },
   title_next: {
     fontSize: 16,
@@ -74,6 +80,6 @@ const styles = StyleSheet.create({
   },
   vote: {
     fontSize: 16,
-    margin: 5
+    margin: 5,
   },
 });
