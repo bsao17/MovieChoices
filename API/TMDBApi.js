@@ -8,7 +8,7 @@ export async function getMovieFromApiWithSearchText(text) {
     TMDB_API_KEY +
     "&language=fr&query=" +
     text;
-  return await axios.get(url).then((data) => {
-    return data.data.results;
+  return await axios.get(url).then((response) => {
+    return response.data.results;
   });
 }

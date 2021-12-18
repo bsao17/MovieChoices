@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-around',
   },
   out_date: {
     textAlign: "right",

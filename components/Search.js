@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View, TextInput, Button, StyleSheet, FlatList } from "react-native";
 import FilmItem from "./FilmItem";
 import { getMovieFromApiWithSearchText } from "../API/TMDBApi";
+import Indicator from "./Indicator";
 
 export default class Search extends Component {
   constructor(props) {
@@ -9,12 +10,13 @@ export default class Search extends Component {
     this.searchText = "";
     this.state = {
       films: [],
+      isLoading: false,
     };
   }
   _loadFilm() {
     if (this.searchText.length > 0) {
       getMovieFromApiWithSearchText(this.searchText).then((data) => {
-        this.setState({ films: data });
+        this.setState({ films: data, isLoading: false });
       });
     }
   }
@@ -23,35 +25,44 @@ export default class Search extends Component {
     this.searchText = text;
   }
 
-  _handleKeyPress(event, K){
-    if(event.key === K){
-        this._loadFilm()
+  _handleKeyPress(event, K) {
+    if (event.key === K) {
+      this._loadFilm();
     }
   }
 
   render() {
-    console.log("render");
     return (
       <View style={styles.container}>
         <TextInput
           style={styles.textinput}
           autoFocus={true}
-          onSubmitEditing={()=>{this._handleKeyPress('enter')}}
+          onSubmitEditing={() => {
+            this.setState({ isLoading: true });
+            this._handleKeyPress("enter");
+          }}
           placeholder={"Titre du film"}
           onChangeText={(text) => {
-              this._searchTextInputChange(text);
-            }}
+            this._searchTextInputChange(text);
+          }}
         />
         <Button
           title="Rechercher"
           onPress={() => {
-            this._loadFilm();
+            setTimeout(() => {
+              this._loadFilm();
+            }, 100);
+            this.setState({ isLoading: true });
           }}
         />
-        <FlatList
-          data={this.state.films}
-          renderItem={({ item }) => <FilmItem key={item.id} item={item} />}
-        />
+        {this.state.isLoading ? (
+          <Indicator />
+        ) : (
+          <FlatList
+            data={this.state.films}
+            renderItem={({ item }) => <FilmItem key={item.id} item={item} />}
+          />
+        )}
       </View>
     );
   }
