@@ -21,7 +21,7 @@ export default class Search extends Component {
         this.page = data.page;
         this.total_pages = data.total_pages;
         console.log({ total_pages: this.total_pages, page_number: this.page });
-        this.setState({ films: data.results, isLoading: false });
+        this.setState({films: [...this.state.films, ...data.results], isLoading: false});
       });
     }
   }
@@ -64,7 +64,12 @@ export default class Search extends Component {
           <FlatList
             data={this.state.films}
             onEndReachedThreshold={0.5}
-            onEndReached={() => {}}
+            onEndReached={() => {
+              if (this.page < this.total_pages) {
+                this.page++;
+                this._loadFilm(this.page);
+              }
+            }}
             renderItem={({ item }) => <FilmItem key={item.id} item={item} />}
           />
         )}
