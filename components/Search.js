@@ -25,6 +25,12 @@ export default class Search extends Component {
       });
     }
   }
+  _searchFilm() {
+    this.page = 0;
+    this.total_pages = 0;
+    this.setState({ isLoading: true, films: [] });
+    this._loadFilm();
+  }
 
   _searchTextInputChange(text) {
     this.searchText = text;
@@ -32,7 +38,7 @@ export default class Search extends Component {
 
   _handleKeyPress(event, K) {
     if (event.key === K) {
-      this._loadFilm(this.page);
+      this._searchFilm();
     }
   }
 
@@ -54,8 +60,7 @@ export default class Search extends Component {
         <Button
           title="Rechercher"
           onPress={() => {
-            this._loadFilm();
-            this.setState({ isLoading: true, films: [] });
+            this._searchFilm();
           }}
         />
         {this.state.isLoading ? (
