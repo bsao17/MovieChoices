@@ -49,9 +49,7 @@ export default class Search extends Component {
         <Button
           title="Rechercher"
           onPress={() => {
-            setTimeout(() => {
-              this._loadFilm();
-            }, 100);
+            this._loadFilm();
             this.setState({ isLoading: true });
           }}
         />
