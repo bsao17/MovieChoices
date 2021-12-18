@@ -7,7 +7,7 @@ import Indicator from "./Indicator";
 export default class Search extends Component {
   constructor(props) {
     super(props);
-    this.page = 1;
+    this.page = 0;
     this.total_pages = 0;
     this.searchText = "";
     this.state = {
@@ -15,9 +15,9 @@ export default class Search extends Component {
       isLoading: false,
     };
   }
-  _loadFilm(page) {
+  _loadFilm() {
     if (this.searchText.length > 0) {
-      getMovieFromApiWithSearchText(this.searchText, page).then((data) => {
+      getMovieFromApiWithSearchText(this.searchText, this.page + 1).then((data) => {
         this.page = data.page;
         this.total_pages = data.total_pages;
         console.log({ total_pages: this.total_pages, page_number: this.page });
@@ -43,7 +43,7 @@ export default class Search extends Component {
           style={styles.textinput}
           autoFocus={true}
           onSubmitEditing={() => {
-            this.setState({ isLoading: true });
+            this.setState({ isLoading: true, films: [] });
             this._handleKeyPress("enter");
           }}
           placeholder={"Titre du film"}
@@ -54,8 +54,8 @@ export default class Search extends Component {
         <Button
           title="Rechercher"
           onPress={() => {
-            this._loadFilm(this.page);
-            this.setState({ isLoading: true });
+            this._loadFilm();
+            this.setState({ isLoading: true, films: [] });
           }}
         />
         {this.state.isLoading ? (
@@ -66,8 +66,7 @@ export default class Search extends Component {
             onEndReachedThreshold={0.5}
             onEndReached={() => {
               if (this.page < this.total_pages) {
-                this.page++;
-                this._loadFilm(this.page);
+                this._loadFilm();
               }
             }}
             renderItem={({ item }) => <FilmItem key={item.id} item={item} />}
