@@ -7,16 +7,21 @@ import Indicator from "./Indicator";
 export default class Search extends Component {
   constructor(props) {
     super(props);
+    this.page = 1;
+    this.total_pages = 0;
     this.searchText = "";
     this.state = {
       films: [],
       isLoading: false,
     };
   }
-  _loadFilm() {
+  _loadFilm(page) {
     if (this.searchText.length > 0) {
-      getMovieFromApiWithSearchText(this.searchText).then((data) => {
-        this.setState({ films: data, isLoading: false });
+      getMovieFromApiWithSearchText(this.searchText, page).then((data) => {
+        this.page = data.page;
+        this.total_pages = data.total_pages;
+        console.log({ total_pages: this.total_pages, page_number: this.page });
+        this.setState({ films: data.results, isLoading: false });
       });
     }
   }
@@ -27,7 +32,7 @@ export default class Search extends Component {
 
   _handleKeyPress(event, K) {
     if (event.key === K) {
-      this._loadFilm();
+      this._loadFilm(this.page);
     }
   }
 
@@ -49,7 +54,7 @@ export default class Search extends Component {
         <Button
           title="Rechercher"
           onPress={() => {
-            this._loadFilm();
+            this._loadFilm(this.page);
             this.setState({ isLoading: true });
           }}
         />
@@ -58,6 +63,8 @@ export default class Search extends Component {
         ) : (
           <FlatList
             data={this.state.films}
+            onEndReachedThreshold={0.5}
+            onEndReached={() => {}}
             renderItem={({ item }) => <FilmItem key={item.id} item={item} />}
           />
         )}
