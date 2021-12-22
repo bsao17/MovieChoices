@@ -1,18 +1,25 @@
-import { createStackNavigator, createAppContainer } from 'react-navigation'
-import Search from '../components/Search'
+import * as React from "react";
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Search from "../components/Search";
 
-const searchStack = createStackNavigator({
-    Search: {
-        screen: Search,
-        navigationOptions: {
-            title: 'Rechercher un film'
-        }
-    }
-})
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
 
-export default createAppContainer(searchStack)
+const searchStack = createNativeStackNavigator();
 
-
-
-
-
+export default function Navigation() {
+  return (
+    <NavigationContainer>
+      <searchStack.Navigator>
+        <searchStack.Screen name="Search" component={Search} />
+      </searchStack.Navigator>
+    </NavigationContainer>
+  );
+}
