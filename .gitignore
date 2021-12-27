@@ -10,7 +10,8 @@ npm-debug.*
 *.orig.*
 web-build/
 moviesQuery.http
-.env
+api-key.js
+
 
 # macOS
 .DS_Store

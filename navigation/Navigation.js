@@ -3,23 +3,17 @@ import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Search from "../components/Search";
+import FilmDetails from "../components/FilmDetails"
 
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-    </View>
-  );
-}
-
-const searchStack = createNativeStackNavigator();
+const stack = createNativeStackNavigator();
 
 export default function Navigation() {
   return (
     <NavigationContainer>
-      <searchStack.Navigator>
-        <searchStack.Screen name="Search" component={Search} />
-      </searchStack.Navigator>
+      <stack.Navigator>
+        <stack.Screen options={{title: "Recherche de films", headerTintColor: "grey"}} name="Search" component={Search} />
+        <stack.Screen name="Details" component={FilmDetails} />
+      </stack.Navigator>
     </NavigationContainer>
   );
 }

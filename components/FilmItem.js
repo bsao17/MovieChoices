@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, View, Text, StyleSheet, Image } from "react-native";
+import { Pressable, View, Text, StyleSheet, Image } from "react-native";
 
 export default function FilmItem({ item }) {
   return (

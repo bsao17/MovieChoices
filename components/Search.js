@@ -3,6 +3,7 @@ import { View, TextInput, Button, StyleSheet, FlatList } from "react-native";
 import FilmItem from "./FilmItem";
 import { getMovieFromApiWithSearchText } from "../API/TMDBApi";
 import Indicator from "./Indicator";
+import {isDisabled} from "react-native/Libraries/LogBox/Data/LogBoxData";
 
 export default class Search extends Component {
   constructor(props) {
@@ -47,7 +48,7 @@ export default class Search extends Component {
       <View style={styles.container}>
         <TextInput
           style={styles.textinput}
-          autoFocus={true}
+          // autoFocus={true}
           onSubmitEditing={() => {
             this.setState({ isLoading: true, films: [] });
             this._handleKeyPress("enter");

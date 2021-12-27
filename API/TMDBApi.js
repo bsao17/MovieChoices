@@ -1,6 +1,6 @@
 import axios from "axios";
+import TMDB_API_KEY from "../api-key.js";
 
-const TMDB_API_KEY = "aa8f04f54fcce47385ba5669d91bccee";
 
 export async function getMovieFromApiWithSearchText(text, page) {
   const url =
