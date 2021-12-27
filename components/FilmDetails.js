@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-export default function FilmDetails(){
+export default function FilmDetails({details}){
     return(
         <View style={styles.container}>
             <Text>Here the details of each film </Text>
