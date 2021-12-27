@@ -1,5 +1,5 @@
 import axios from "axios";
-import TMDB_API_KEY from "../api-key.js";
+import {TMDB_API_KEY} from "../api-key.js";
 
 
 export async function getMovieFromApiWithSearchText(text, page) {
