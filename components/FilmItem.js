@@ -1,15 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import FilmDetails from "./FilmDetails";
 
-export default function FilmItem({ item, displayDetailForFilm, nav, filmId }) {
+export default function FilmItem({ item, displayDetailForFilm }) {
   return (
     <TouchableOpacity
       style={styles.container}
       key={item.id}
       onPress={() =>{
         displayDetailForFilm(item.id);
-        nav.navigate("Details", { filmId: item.id });
       }}
     >
       {/* Poster */}
