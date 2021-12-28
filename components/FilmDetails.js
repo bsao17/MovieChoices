@@ -11,8 +11,13 @@ export default function FilmDetails({ route, navigation }) {
   
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{idFilm}</Text>
-      <Text style={styles.title}>{dataFilm.overview}</Text>
+        <Image
+            style={styles.image}
+            source={{uri: "https://image.tmdb.org/t/p/original" + dataFilm.poster_path}}
+            style={{ width: "100%", height: "100%" }}
+        />
+      <Text style={styles.title}>{dataFilm.title}</Text>
+      <Text style={styles.text}>{dataFilm.overview}</Text>
     </View>
   );
 }
