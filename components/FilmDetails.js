@@ -1,7 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { getMovieDetailsFromApi } from "../API/TMDBApiDetail";
 
-export default function FilmDetails({details}){
+export default function FilmDetails(){
+    // getMovieDetailsFromApi(idFilm).then(data=>console.log(data));
+
     return(
         <View style={styles.container}>
             <Text>Here the details of each film </Text>
@@ -11,6 +14,9 @@ export default function FilmDetails({details}){
 
 const styles = StyleSheet.create({
     container: {
-        width: "100%",
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#F5FCFF",
     }
 })

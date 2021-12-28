@@ -3,11 +3,11 @@ import { View, TextInput, Button, StyleSheet, FlatList } from "react-native";
 import FilmItem from "./FilmItem";
 import { getMovieFromApiWithSearchText } from "../API/TMDBApi";
 import Indicator from "./Indicator";
-import {isDisabled} from "react-native/Libraries/LogBox/Data/LogBoxData";
+
 
 export default class Search extends Component {
-  constructor(props) {
-    super(props);
+  constructor(navigation) {
+    super(navigation);
     this.page = 0;
     this.total_pages = 0;
     this.searchText = "";
@@ -18,12 +18,20 @@ export default class Search extends Component {
   }
   _loadFilm() {
     if (this.searchText.length > 0) {
-      getMovieFromApiWithSearchText(this.searchText, this.page + 1).then((data) => {
-        this.page = data.page;
-        this.total_pages = data.total_pages;
-        console.log({ total_pages: this.total_pages, page_number: this.page });
-        this.setState({films: [...this.state.films, ...data.results], isLoading: false});
-      });
+      getMovieFromApiWithSearchText(this.searchText, this.page + 1).then(
+        (data) => {
+          this.page = data.page;
+          this.total_pages = data.total_pages;
+          console.log({
+            total_pages: this.total_pages,
+            page_number: this.page,
+          });
+          this.setState({
+            films: [...this.state.films, ...data.results],
+            isLoading: false,
+          });
+        }
+      );
     }
   }
   _searchFilm() {
@@ -42,6 +50,10 @@ export default class Search extends Component {
       this._searchFilm();
     }
   }
+
+  _displayDetailForFilm = (idFilm) => {
+    console.log("Display film with id " + idFilm);
+  };
 
   render() {
     return (
@@ -75,7 +87,14 @@ export default class Search extends Component {
                 this._loadFilm();
               }
             }}
-            renderItem={({ item }) => <FilmItem key={item.id} item={item} />}
+            renderItem={({ item }) => (
+              <FilmItem
+                key={item.id}
+                item={item}
+                displayDetailForFilm={this._displayDetailForFilm}
+                nav={this.props.navigation}
+              />
+            )}
           />
         )}
       </View>

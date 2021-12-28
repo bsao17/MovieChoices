@@ -1,9 +1,17 @@
 import React from "react";
-import { Pressable, View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import FilmDetails from "./FilmDetails";
 
-export default function FilmItem({ item }) {
+export default function FilmItem({ item, displayDetailForFilm, nav, filmId }) {
   return (
-    <View style={styles.container} key={item.id}>
+    <TouchableOpacity
+      style={styles.container}
+      key={item.id}
+      onPress={() =>{
+        displayDetailForFilm(item.id);
+        nav.navigate("Details", { filmId: item.id });
+      }}
+    >
       {/* Poster */}
       <View style={styles.poster}>
         <Image
@@ -34,7 +42,7 @@ export default function FilmItem({ item }) {
           </Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -56,7 +64,7 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: 'space-around',
+    justifyContent: "space-around",
   },
   out_date: {
     textAlign: "right",
@@ -65,10 +73,10 @@ const styles = StyleSheet.create({
   },
   title_next: {
     fontSize: 14,
-    margin: 5,
+    marginTop: 5,
     paddingHorizontal: 15,
-    fontWeight: 'bold',
-    width: '80%'
+    fontWeight: "bold",
+    width: "80%",
   },
   poster: {
     flex: 1,
@@ -84,6 +92,6 @@ const styles = StyleSheet.create({
   vote: {
     fontSize: 16,
     margin: 5,
-    marginRight: 20
+    marginRight: 20,
   },
 });
