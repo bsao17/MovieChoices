@@ -46,14 +46,14 @@ const styles = StyleSheet.create({
   date: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignItems: "center",
-    width: "100%",
-    margin: "auto"
+    marginTop: 10
   },
   text: {
     fontSize: 20,
-    padding: 10,
+    padding: 20,
+    textAlign: "justify",
   },
   image: {
     width: "100%",
@@ -61,6 +61,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 25,
     fontWeight: "bold",
-    margin: 10,
+    margin: 20,
   },
 });
