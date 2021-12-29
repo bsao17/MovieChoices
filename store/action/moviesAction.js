@@ -1,8 +1,16 @@
-export const SET_MOVIES = "SET_MOVIES";
+export const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
+export const REMOVE_FROM_FAVORITES = "REMOVE_FROM_FAVORITES";
 
-export default function setMovie(movies) {
+export const addFavorites = (movies) => {
   return {
-    type: SET_MOVIES,
+    type: ADD_TO_FAVORITES,
+    movies,
+  };
+}
+
+export const removeFavorites = (movies) => {
+  return {
+    type: REMOVE_FROM_FAVORITES,
     movies,
   };
 }
