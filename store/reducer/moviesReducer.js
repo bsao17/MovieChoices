@@ -1,21 +1,11 @@
-import { ADD_TO_FAVORITES } from "../action/moviesAction";
-import { REMOVE_FROM_FAVORITES } from "../action/moviesAction";
+import { TOGGLE_FAVORITES } from "../action/moviesAction";
 
 export default function toggleFavorites(state = [], action) {
-  let nextState;
-  switch (action.type) {
-    case ADD_TO_FAVORITES:
-      nextState = {
-        ...state,
-        movies: [...state.push(action.movies)],
-      };
-    case REMOVE_FROM_FAVORITES:
-      nextState = {
-        ...state,
-        movies: [...state.filter((movies) => movies.id !== action.movies.id)],
-      };
-      return nextState;
-    default:
-      return state;
+  if(action.type === TOGGLE_FAVORITES) {
+    return {
+      ...state,
+      movies: state.findIndex(movie => movie.id === action.movies.id) === -1 ? [...state, action.movies] : state.filter(movie => movie.id !== action.movies.id)
+    }
   }
-} // moviesReducer
+  
+} // end toggleFavorites
