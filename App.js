@@ -1,10 +1,10 @@
 import * as React from "react";
 import Navigation from "./navigation/Navigation";
 import { Provider } from "react-redux";
-import toggleFavorites from "./store/reducer/moviesReducer";
 import {createStore} from "redux";
+import toggleFavoritesReducer from "./store/reducer/moviesReducer";
 
-const store = createStore(toggleFavorites);
+const store = createStore(toggleFavoritesReducer);
 
 export default function App() {
   return (

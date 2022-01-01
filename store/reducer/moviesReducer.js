@@ -1,6 +1,6 @@
 import { TOGGLE_FAVORITES } from "../action/moviesAction";
 
-export default function toggleFavorites(state = [], action) {
+export default function toggleFavoritesReducer(state = [], action) {
   if(action.type === TOGGLE_FAVORITES) {
     return {
       ...state,

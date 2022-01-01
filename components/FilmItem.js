@@ -1,7 +1,8 @@
-import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import React, {useState} from "react";
+import { View, Text, StyleSheet, Image, TouchableOpacity, Button } from "react-native";
 
 export default function FilmItem({ item, displayDetailForFilm }) {
+  const{favorite} = useState(false);
   return (
     <TouchableOpacity
       style={styles.container}
@@ -29,6 +30,7 @@ export default function FilmItem({ item, displayDetailForFilm }) {
         </View>
         {/* Details data */}
         <View>
+          <TouchableOpacity style={{marginLeft: 20}}>{favorite ? <Text>❤️</Text> : <Text>🖤</Text>}</TouchableOpacity>
           <Text style={styles.films_details} numberOfLines={5}>
             {item.overview}
           </Text>
