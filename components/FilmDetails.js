@@ -1,13 +1,19 @@
 import React, { useState } from "react";
-import { ScrollView, View, Text, StyleSheet, Image } from "react-native";
+import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { getMovieDetailsFromApi } from "../API/TMDBApiDetail";
 
 export default function FilmDetails({ route, navigation }) {
   const [dataFilm, setDataFilm] = useState("");
   const { idFilm } = route.params;
+  const [favorite, setFavorite] = useState(false);
+
   getMovieDetailsFromApi(idFilm).then((data) => {
     return setDataFilm(data);
   });
+
+  const addFavorite = () => {
+    setFavorite(!favorite);
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -27,6 +33,7 @@ export default function FilmDetails({ route, navigation }) {
         }}
       >
         <View style={styles.date}>
+        <TouchableOpacity onPress={addFavorite} style={{marginLeft: 20}}>{favorite ? <Text>❤️</Text> : <Text>🚫</Text>}</TouchableOpacity>
           <Text style={styles.text}>Sortie le : {dataFilm.release_date}</Text>
           <Text style={styles.text}>⭐ {dataFilm.vote_average}</Text>
         </View>

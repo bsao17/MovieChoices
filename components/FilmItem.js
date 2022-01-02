@@ -30,7 +30,7 @@ export default function FilmItem({ item, displayDetailForFilm }) {
         </View>
         {/* Details data */}
         <View>
-          <TouchableOpacity style={{marginLeft: 20}}>{favorite ? <Text>❤️</Text> : <Text>🖤</Text>}</TouchableOpacity>
+          <TouchableOpacity style={{marginLeft: 20}}>{favorite ? <Text>❤️</Text> : <Text></Text>}</TouchableOpacity>
           <Text style={styles.films_details} numberOfLines={5}>
             {item.overview}
           </Text>
