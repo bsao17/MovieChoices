@@ -1,3 +1,5 @@
 # Mobile app Movies Search Engine developed with react-native
 
-<video>https://www.youtube.com/embed/WlrjjdBscD4</video>
+<video>
+  <source src="https://www.youtube.com/embed/WlrjjdBscD4" type="video/mp4">
+</video>
